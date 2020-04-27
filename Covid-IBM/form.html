@@ -1,0 +1,47 @@
+<html>
+<title>login form</title>
+<body>
+<center>
+<form>
+		<font size="33">
+		<fieldset>
+		<legend><b><u>Login Form</b></u></legend>
+		your Name
+		<input type="text" id="name" required><br>
+		Enter password
+		<input type="password" id="pass" required><br>
+		<input type="button" value="submit"onclick="validate()">
+		<input type="reset" value="reset"><br>
+		<a href="sgr.html">
+		create new account
+
+
+</form>
+</fieldset>
+</center>
+		<script>
+		function validate()
+		{
+			console.log(pass)
+			var name=document.getElementById("name").value;
+			var pass=document.getElementById("pass").value;
+			if(name=="")
+			{
+				alert("plz enter email")
+				}
+			else if(pass=="")
+				{
+				alert("plz enter password")
+				}
+			else{
+		          
+		          console.log(pass)
+		          if(name==="covid"&&pass==='123'){
+			          window.location.href="covid-dashboard.html"
+		           }
+	            }
+	    }
+	</script>	
+
+</body>
+</html>

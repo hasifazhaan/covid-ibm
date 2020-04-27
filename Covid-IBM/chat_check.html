@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		header{
+			text-align: center;
+			font: 50px solid black;
+		}
+		.dis{
+			padding-right:45%; 
+			padding-left: 35%;
+			display: none;
+			
+		}
+		.req{
+			background-color: blue;
+			color:white;
+		  height: 30px;
+			width: 250px;
+			border-radius:15px;
+			font:20px solid black;
+			
+		}
+		#get_data{
+			border-color:dodgerblue;
+			border-width: 3px;
+			margin: 25% 0 0 33%;
+				padding-right: 15%; 
+			border-radius: 7px;
+		}
+		.user_inp{
+			padding-right:45%; 
+			padding-left: 45%;
+		}
+		.user_dis{
+			background-color: white;
+			color:black;
+		  height: 30px;
+			width: 250px;
+			border-radius:15px;
+			font:20px solid black;
+			border-color:blue;
+
+		}
+
+		
+	</style>
+	<meta charset="utf-8">
+<script src= "https://code.jquery.com/jquery-1.12.4.min.js"> 
+	</script> 
+</head>
+<body>
+
+<header>Self Assistant
+<img src="logo.jpg" height="70px" width="70px">
+</header>
+<br>
+<article>
+	<section class="dis" id="content">
+		<input type="text" name="" disabled="" value="Welcome to the application " class="req">
+		<br>
+		<input type="" name=""  disabled="" value="we are here to help you"class="req">
+		<br>
+		<input type="text" name="" disabled="" value="Enter Your Age "class="req">
+		<br>
+		<br>
+		
+	</section>
+
+	<section class="user_inp">
+		
+	</section>
+
+	<section class="dis" id="content">
+		<textarea type="text" name="" disabled="" value=""class="req" style="width: 280px; height: 64px">Do You have any symptoms mentioned Below? </textarea>
+		<button onclick="butt(2)">cough</button>  <button onclick="butt(1)">fever</button><br>
+		<button onclick="butt(3)">both</button><button onclick="butt(0)">None of mentioned</button>
+		
+		<br><br>
+	</section>
+
+	<section class = dis id="content">
+		<textarea name="" disabled="" value=""class="req"style="width: 280px; height: 64px;">Do You have any Of Following Diesease mentioned below? </textarea>
+	
+		<button onclick="butt(2)">Diabetes</button><button onclick="butt(3)">Hypertension</button>
+		<br>
+		<button onclick="butt(4)">Lung Disease</button> <button onclick="butt(1)">Heart Diesease</button>
+		<br>
+		<button onclick="butt(0)">None of the above</button>
+		<br><br>
+	</section>
+
+	<section class="dis" id="content">
+		<textarea name="" disabled="" value=""class="req"style="width: 280px; height: 64px;">Have you traveled anywhere internationally in the last 14 days?</textarea>
+			<br>
+			<button onclick="butt(10)">Yes</button><button onclick="butt(0)">No</button>
+			<br><br>
+	</section>
+
+	<section class ="dis" id="content">
+		<textarea name="" disabled="" value=""class="req"style="width: 280px; height: 64px;">Have You Been In Contact With A Covid - 19 Patient  </textarea>
+		<button onclick="butt(10)">Yes</button><button onclick="butt(0)">No</button>
+	</section>
+	<section >
+		<input type="text" name="" value="" id="get_data" placeholder="Write Your Message">
+			<img src="send_logo.jpg" height="18px" width="30px" id="send" onclick="submit_on()">
+		
+	</section>
+
+</article>
+
+ <script type="text/javascript">
+
+ 	if (!('speechSynthesis' in window) ){
+ 		alert("Please Change browser or upgrade it !")
+
+ 	}
+ 	var synthesis = window.speechSynthesis;
+    var voice = synthesis.getVoices().filter(function(voice) {
+    	return voice.lang === 'en';
+  })[0];
+
+
+ var utterance = new SpeechSynthesisUtterance();
+ var voice_cnt = 0
+ 	var count = 0
+ 	var nor = 0
+ 	var displa = document.getElementsByClassName("dis")
+ 	var input=document.querySelector("#get_data")
+ 	var send_btn = document.querySelector("#send_logo") 
+ 	var msg = []
+setTimeout(()=>{
+	displa[count].style.display = "block"
+
+	speek(msg[voice_cnt])
+	speek(msg[voice_cnt+=1])
+	voice_cnt+=1
+	
+},900)
+
+par_len = displa.length
+
+for( var i =0; i<par_len;i++){
+	child_len = displa[i].children.length
+	for(var j = 0;j<child_len;j++)
+	{	var sp = displa[i].children[j].value
+		if(sp!=""){
+			if(sp!=undefined){
+				msg.push(sp)
+				
+			}
+
+		}
+	}	
+}
+
+ function gor(){
+ 	setTimeout(()=>{
+ 		
+ 		try{
+ 			displa[count+=1].style.display = "block"
+ 	speek(msg[voice_cnt+=1])
+ }
+ 		catch(err){
+ 			ans()
+ 		}
+	
+},500)}
+
+
+
+
+ 	input.addEventListener("keyup",e =>{
+	if(e.key==="Enter")							//enter click
+		submit_on();
+
+})
+ 	function submit_on(){
+ 		var age= input.value
+	 	var create_node = document.querySelector(".user_inp")
+	 	var created=document.createElement("input")
+	 	created.setAttribute("type","text")
+	 	created.setAttribute("disabled","")
+	 	created.setAttribute("value",age)
+	 	created.setAttribute("class","user_dis")
+	 	input.value=""
+	 	create_node.appendChild(created)
+	 	gor()
+	 }
+
+function butt(arg){
+	nor+=arg
+	gor()
+
+}
+function ans()
+{
+	var ms1= "Your safe"
+	var ms2 = "Your at Low Level Of Risk But Be safe Be At Home "
+	var ms3 = "Your At A very High Risk ,Please Consult A Doctor"
+	if(nor==0){
+		speek(ms1)
+		alert(ms1)
+		
+	}
+	if (nor>0&&nor<9){
+		speek(ms2)
+		alert(ms2)
+		
+	}
+	if(nor>=9){
+		speek(ms3)
+		alert(ms3)
+		
+	}
+}
+
+  // Set utterance properties
+  utterance.voice = voice;
+  utterance.pitch = 1.5;
+  utterance.rate = 1.05;
+  utterance.volume = 0.8;
+
+  
+  function speek(msg)
+  {
+  	utterance.text = msg
+  // Speak the utterance
+  synthesis.speak(utterance);
+}
+
+ </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+body{
+	background-color:#ced4d942;;
+}
+header{
+	text-align: center;
+	color: green;
+	font:50px solid;
+
+}
+nav{
+	padding-left:20%; 
+	color: green;
+	font:20px solid;
+}
